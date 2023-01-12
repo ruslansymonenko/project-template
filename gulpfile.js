@@ -5,7 +5,7 @@ const prefix = require('gulp-autoprefixer');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const browserSync = require('browser-sync').create();
-const fileinclude = require('gulp-file-include');
+const imagemin = require('gulp-imagemin');
 
 function compilecss () {
   return src('src/scss/*.scss')
@@ -27,6 +27,13 @@ function jsmin () {
     .pipe(browserSync.stream())
 }
 
+async function imageMin () {
+  src('src/images/**/*')
+  .pipe(imagemin())
+  .pipe(dest('./build/images'))
+  .pipe(browserSync.stream())
+}
+
 function buildHtml () {
   return src('src/*.html')
     .pipe(dest('./build'))
@@ -42,6 +49,7 @@ function watchTask() {
   watch('src/index.html', buildHtml)
   watch('src/scss/style.scss', compilecss);
   watch('src/js/**/*.js', jsmin)
+  watch('src/images/**/*')
 }
 
 
@@ -49,17 +57,11 @@ function watchTask() {
 exports.default = series(
   compilecss,
   jsmin,
+  imageMin,
   buildHtml,
   watchTask
 );
 
-// gulp.task('fileinclude', function() {
-//   gulp.src(['index.html'])
-//     .pipe(fileinclude({
-//       prefix: '@@',
-//       basepath: '@file'
-//     }))
-//     .pipe(gulp.dest('./'));
-// });
+
 
 
