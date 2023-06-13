@@ -1,11 +1,9 @@
-@use 'sass:math';
-$containerWith: 1200;
-$containerPadding: 40;
-$containerSidePadding: math.div($containerPadding, 2);
+//Colors
 
-$breakpoint1450: 1449.98 + px;
-$breakpoint992: 991.98 + px;
-$breakpoint768: 767.98 + px;
-$breakpoint480: 479.98 + px;
 
-$burgerBreakpoint: $breakpoint992;
+//Layers
+$Z-INDEX_LEVEL_1: 1;
+$Z-INDEX_LEVEL_2: 5;
+$Z-INDEX_LEVEL_3: 10;
+$Z-INDEX_LEVEL_4: 50;
+$Z-INDEX_LEVEL_4: 100;

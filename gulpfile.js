@@ -16,9 +16,13 @@ function compilecss () {
     .pipe(browserSync.stream())
 }
 
+//In this template, frequently used libraries, you can add your own
+
 function jsmin () {
   return src([
-    'src/js/libs/jquery-3.6.3.min.js',
+    // 'src/js/libs/jquery-3.6.3.min.js',
+    // 'src/js/libs/slick.min.js',
+    // 'src/js/libs/aos.js',
     'src/js/*.js'
   ])
     .pipe(uglify())
@@ -34,11 +38,21 @@ async function imageMin () {
   .pipe(browserSync.stream())
 }
 
-function buildHtml () {
-  return src('src/*.html')
+function buildMainPages () {
+  return src([
+    'src/index.html',
+  ])
     .pipe(dest('./build'))
     .pipe(browserSync.stream())
 }
+
+//For using php on your website
+
+// function buildPhp () {
+//   return src('src/php/*.php')
+//     .pipe(dest('./build/php'))
+//     .pipe(browserSync.stream())
+// }
 
 function watchTask() {
   browserSync.init({
@@ -46,22 +60,20 @@ function watchTask() {
       baseDir: "./build"
     }
   });
-  watch('src/index.html', buildHtml)
-  watch('src/scss/style.scss', compilecss);
-  watch('src/js/**/*.js', jsmin)
-  watch('src/images/**/*')
+  watch('src/index.html', buildMainPages);
+  watch('src/scss/**/*.scss', compilecss);
+  watch('src/js/**/*.js', jsmin);
+  // watch('src/php/*.php', buildPhp);
+  watch('src/images/**/*');
 }
-
-
 
 exports.default = series(
   compilecss,
   jsmin,
   imageMin,
-  buildHtml,
+  buildMainPages,
   watchTask
 );
-
 
 
 

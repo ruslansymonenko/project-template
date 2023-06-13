@@ -1,26 +1,36 @@
-@import './__vars.scss';
+@import './_vars.scss';
+@import './_fonts';
 
-.container {
-  max-width: ($containerWith + $containerPadding) + px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 $containerSidePadding + px;
+//----------Mixin
 
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-@media (max-width: $breakpoint1450) {
+//-----------------Global elements
+
+.header {
+
+}
+
+.footer {
+
+}
+
+body {
+  position: relative;
+  font-size: 14px;
+  font-weight: 400;
+  z-index: $Z-INDEX_LEVEL_1;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.container{
+  width: 90%;
   max-width: 1200px;
-}
-
-@media (max-width: $breakpoint992) {
-  max-width: 978px;
-}
-
-@media (max-width: $breakpoint768) {
-  max-width: 740px;
-}
-
-@media (max-width: $breakpoint480) {
-  max-width: none;
-}
-
+  margin: 0 auto;
+  padding: 20px;
 }
